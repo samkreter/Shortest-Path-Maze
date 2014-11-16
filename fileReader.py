@@ -1,3 +1,5 @@
+
+#makes the map matrix from the file
 def makeMatrix():
 
   matrix = []
@@ -11,8 +13,14 @@ def makeMatrix():
 
   return matrix;
 
+#prints the matrix given to it on the screen
+def printMatrix(matrix):
+  for array in matrix:
+    for elem in array:
+      print elem,
+    print
 
-
-matrix = makeMatrix()
-for array in matrix:
-  print array
+def findE(matrix):
+   for index, array in enumerate(matrix):
+     if "E" in array:
+       coords = [index,array.index("E")]
