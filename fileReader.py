@@ -10,14 +10,16 @@ class qObj:
 class Matrix:
 
   #takes in a filepath and creates the self.matrix from the text file
-  def _init_(self,filePath):
+  def __init__(self,filePath):
     matrix = []
     for line in open(filePath):
       temp = []
       for c in line:
-        temp.append(c);
-      matrix.append(temp);
+        temp.append(c)
+      matrix.append(temp)
     self.matrix = matrix
+    self.graph = {}
+    self.start = 
 
 
   #prints the matrix given to it on the screen
@@ -34,6 +36,13 @@ class Matrix:
         return coords
     print "couldn't find E"
 
+  def createGraph(self):
+    for indm, array in enumerate(self.matrix):
+      for inda, elem in enumerate(array):
+        if elem == " ":
+          self.graph[(indm,inda)] = [];
 
-m = Matrix()
+
+
+m = Matrix("maze.txt")
 m.printMatrix()
