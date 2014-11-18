@@ -1,11 +1,4 @@
-
-#makes the map matrix from the file
-class qObj:
-  def _init_(self,coords,steps):
-    self.coord1 = coord1
-    self.coord2 = coord2
-    self.steps = steps
-
+from pprint import pprint
 
 class Matrix:
 
@@ -19,7 +12,7 @@ class Matrix:
       matrix.append(temp)
     self.matrix = matrix
     self.graph = {}
-    self.start = 
+
 
 
   #prints the matrix given to it on the screen
@@ -29,20 +22,27 @@ class Matrix:
         print elem,
       print
 
-  def findE(self):
-    for index, array in enumerate(self.matrix):
-      if "E" in array:
-        coords = [index,array.index("E")]
-        return coords
-    print "couldn't find E"
 
+  #creates the graph from the matrix and finds the start and end points
   def createGraph(self):
     for indm, array in enumerate(self.matrix):
-      for inda, elem in enumerate(array):
-        if elem == " ":
-          self.graph[(indm,inda)] = [];
-
-
+      for inda, elem in enumerate(array):       ############check this weird -2 thing#######
+        if inda != 0 and indm != 0 and indm < len(self.matrix)-2 and inda < len(array):
+          if elem == " " or elem == "E" or elem == "S":
+            self.graph[(indm,inda)] = []
+            if self.matrix[indm-1][inda] == " ":
+              self.graph[(indm,inda)].append((indm-1,inda))
+            if self.matrix[indm][inda-1] == " ":
+              self.graph[(indm,inda)].append((indm,inda-1))
+            if self.matrix[indm+1][inda] == " ":
+              self.graph[(indm,inda)].append((indm+1,inda))
+            if self.matrix[indm][inda+1] == " ":
+              self.graph[(indm,inda)].append((indm,inda+1))
+          if elem == "E":
+            self.end = (indm,inda)
+          if elem == "S":
+            self.start = (indm,inda)
 
 m = Matrix("maze.txt")
-m.printMatrix()
+m.createGraph()
+pprint(m.graph)
