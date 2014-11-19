@@ -43,6 +43,6 @@ class Matrix:
           if elem == "S":
             self.start = (indm,inda)
 
-m = Matrix("maze.txt")
+m = Matrix("hey.txt")
 m.createGraph()
 pprint(m.graph)
