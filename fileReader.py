@@ -8,10 +8,14 @@ class Matrix:
     for line in open(filePath):
       temp = []
       for c in line:
+        if(c == " "):
+          c = "-"
         temp.append(c)
       matrix.append(temp)
     self.matrix = matrix
     self.graph = {}
+
+
 
 
 
@@ -45,4 +49,4 @@ class Matrix:
 
 m = Matrix("hey.txt")
 m.createGraph()
-pprint(m.graph)
+print m.matrix[0][0]
