@@ -91,24 +91,3 @@ class Matrix:
             self.end = (indm,inda)
           if elem == "S":
             self.start = (indm,inda)
-
-  #creates the graph from the matrix and finds the start and end points but adds *
-  def createGraphA(self):
-    for indm, array in enumerate(self.matrix):
-      for inda, elem in enumerate(array):       ############check this weird -2 thing#######
-        if inda != 0 and indm != 0 and indm < len(self.matrix)-2 and inda < len(array):
-          if elem == " " or elem == "E" or elem == "S":
-            self.graph[(indm,inda)] = []
-            self.matrix[indm][inda] = "*"
-            if self.matrix[indm-1][inda] == " ":
-              self.graph[(indm,inda)].append((indm-1,inda))
-            if self.matrix[indm][inda-1] == " ":
-              self.graph[(indm,inda)].append((indm,inda-1))
-            if self.matrix[indm+1][inda] == " ":
-              self.graph[(indm,inda)].append((indm+1,inda))
-            if self.matrix[indm][inda+1] == " ":
-              self.graph[(indm,inda)].append((indm,inda+1))
-          if elem == "E":
-            self.end = (indm,inda)
-          if elem == "S":
-            self.start = (indm,inda)
