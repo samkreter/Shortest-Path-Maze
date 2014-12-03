@@ -17,7 +17,8 @@ class Matrix:
 
 
 
-
+  def printGraph(self):
+    pprint(self.graph)
 
   #prints the matrix given to it on the screen
   def printMatrix(self):
@@ -75,7 +76,7 @@ class Matrix:
   def createGraph(self):
     for indm, array in enumerate(self.matrix):
       for inda, elem in enumerate(array):       ############check this weird -2 thing#######
-        if inda != 0 and indm != 0 and indm < len(self.matrix)-2 and inda < len(array):
+        if inda != 0 and indm != 0 and indm < len(self.matrix)-1 and inda < len(array)-1:
           if elem == " " or elem == "E" or elem == "S":
             self.graph[(indm,inda)] = []
             if self.matrix[indm-1][inda] == " ":

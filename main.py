@@ -2,4 +2,6 @@ from Matrix import Matrix
 
 
 m = Matrix("maze.txt")
-m.findPath(m.startx,m.starty)
+m.createGraph()
+m.printGraph()
+print m.start ,m.end
