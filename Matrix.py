@@ -13,6 +13,7 @@ class Matrix:
     self.matrix = matrix
     self.getStart()
     self.graph = {}
+    self.paths = []
     self.count = 0
 
 
@@ -79,15 +80,24 @@ class Matrix:
         if inda != 0 and indm != 0 and indm < len(self.matrix)-1 and inda < len(array)-1:
           if elem == " " or elem == "E" or elem == "S":
             self.graph[(indm,inda)] = []
-            if self.matrix[indm-1][inda] == " ":
+            if self.matrix[indm-1][inda] == " " or self.matrix[indm-1][inda] == "E":
               self.graph[(indm,inda)].append((indm-1,inda))
-            if self.matrix[indm][inda-1] == " ":
+            if self.matrix[indm][inda-1] == " " or self.matrix[indm][inda-1] == "E":
               self.graph[(indm,inda)].append((indm,inda-1))
-            if self.matrix[indm+1][inda] == " ":
+            if self.matrix[indm+1][inda] == " " or self.matrix[indm+1][inda] == "E":
               self.graph[(indm,inda)].append((indm+1,inda))
-            if self.matrix[indm][inda+1] == " ":
+            if self.matrix[indm][inda+1] == " " or self.matrix[indm][inda+1] == "E":
               self.graph[(indm,inda)].append((indm,inda+1))
           if elem == "E":
             self.end = (indm,inda)
+            self.graph
           if elem == "S":
             self.start = (indm,inda)
+
+  def dfs(self,start,path=[]):
+    path = path+[start]
+    if start == self.end:
+      self.append(path)
+    for node in self.graph[start]:
+      if node not in path:
+        self.dfs(node,path)
