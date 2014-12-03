@@ -11,7 +11,9 @@ class Matrix:
         temp.append(c)
       matrix.append(temp)
     self.matrix = matrix
+    self.getStart()
     self.graph = {}
+    self.count = 0
 
 
 
@@ -23,6 +25,50 @@ class Matrix:
       for elem in array:
         print elem,
       print
+
+  def getStart(self):
+    for indm, array in enumerate(self.matrix):
+      for inda, elem in enumerate(array):
+        if elem == "S":
+          self.startx = indm
+          self.starty = inda
+          print "found start at ",indm," ",inda
+
+  def findPath(self,x,y):
+    #should never be used but check bounds
+    if(x >= len(self.matrix) or x < 0):
+      return False
+    if(y >= len(self.matrix[x]) or y < 0):
+      return False
+
+
+    if(self.matrix[x][y] == "#" or self.matrix[x][y] == "+"):
+      return False
+    #check if found the end
+    if(self.matrix[x][y] == "E"):
+      return True
+
+    #mark the path
+    self.matrix[x][y] = "+"
+
+    self.printMatrix()##############print the matrix with each iteration
+
+    if(self.findPath(x+1,y)):
+      return True
+    if(self.findPath(x,y-1)):
+      return True
+    if(self.findPath(x-1,y)):
+      return True
+    if(self.findPath(x,y+1)):
+      return True
+
+    #if all directions are face
+    self.matrix[x][y] = " "
+    return False
+
+
+
+
 
 
   #creates the graph from the matrix and finds the start and end points
@@ -65,9 +111,3 @@ class Matrix:
             self.end = (indm,inda)
           if elem == "S":
             self.start = (indm,inda)
-
-
-
-m = Matrix("maze.txt")
-m.createGraph()
-m.printMatrix()
