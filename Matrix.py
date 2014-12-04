@@ -105,6 +105,8 @@ class Matrix:
     for node in self.graph[start]:
       if node not in path:
         self.dfs(node,path)
+
+
   def findShortestPath(self):
     self.sPath = self.paths[0]
     sLength = len(self.paths[0]);
@@ -112,3 +114,9 @@ class Matrix:
       if len(path) < sLength:
         sLength = len(path)
         self.sPath = path
+
+  def showPath(self):
+    for steps in self.sPath:
+      self.matrix[steps[0]][steps[1]] = "+"
+
+  
