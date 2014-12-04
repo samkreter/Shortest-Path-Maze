@@ -19,7 +19,7 @@ class Matrix:
 
 
   def printGraph(self):
-    pprint(self.graph)s
+    pprint(self.graph)
 
   #prints the matrix given to it on the screen
   def printMatrix(self):
