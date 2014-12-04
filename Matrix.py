@@ -14,14 +14,12 @@ class Matrix:
     self.getStart()
     self.graph = {}
     self.paths = []
-    self.count = 0
     self.sPath = []
-    self.pathCount = float("inf")
 
 
 
   def printGraph(self):
-    pprint(self.graph)
+    pprint(self.graph)s
 
   #prints the matrix given to it on the screen
   def printMatrix(self):
@@ -45,7 +43,6 @@ class Matrix:
     if(y >= len(self.matrix[x]) or y < 0):
       return False
 
-
     if(self.matrix[x][y] == "#" or self.matrix[x][y] == "+"):
       return False
     #check if found the end
@@ -54,9 +51,6 @@ class Matrix:
 
     #mark the path
     self.matrix[x][y] = "+"
-
-    self.printMatrix()##############print the matrix with each iteration
-
     if(self.findPath(x+1,y)):
       return True
     if(self.findPath(x,y-1)):
@@ -69,10 +63,6 @@ class Matrix:
     #if all directions are face
     self.matrix[x][y] = " "
     return False
-
-
-
-
 
 
   #creates the graph from the matrix and finds the start and end points
@@ -96,6 +86,7 @@ class Matrix:
           if elem == "S":
             self.start = (indm,inda)
 
+  #Rescusive DFS that finds all paths from start to the end
   def dfs(self,start,path=[]):
     print start
     path = path+[start]
@@ -106,7 +97,7 @@ class Matrix:
       if node not in path:
         self.dfs(node,path)
 
-
+  #from the paths found from the DFS will pick the shortest path
   def findShortestPath(self):
     self.sPath = self.paths[0]
     sLength = len(self.paths[0]);
@@ -115,8 +106,7 @@ class Matrix:
         sLength = len(path)
         self.sPath = path
 
+  #puts the paths on the matrix to display to the user
   def showPath(self):
     for steps in self.sPath:
       self.matrix[steps[0]][steps[1]] = "+"
-
-  
