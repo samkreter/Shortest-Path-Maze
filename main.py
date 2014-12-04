@@ -6,5 +6,4 @@ m.createGraph()
 # m.printGraph()
 m.dfs(m.start)
 print " "
-m.findShortestPath()
-print m.sPath
+print m.paths

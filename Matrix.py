@@ -16,7 +16,7 @@ class Matrix:
     self.paths = []
     self.count = 0
     self.sPath = []
-    self.pathCount = float("inf")
+    self.pathCount = 100
 
 
 
@@ -97,14 +97,17 @@ class Matrix:
             self.start = (indm,inda)
 
   def dfs(self,start,path=[]):
+    if len(path) > self.pathCount:
+      return
     print start
     path = path+[start]
     if start == self.end:
-      self.paths.append(path)
+      self.paths = path
       return
     for node in self.graph[start]:
       if node not in path:
         self.dfs(node,path)
+
   def findShortestPath(self):
     self.sPath = self.paths[0]
     sLength = len(self.paths[0]);
