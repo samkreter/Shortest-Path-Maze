@@ -16,6 +16,7 @@ class Matrix:
     self.paths = []
     self.count = 0
     self.sPath = []
+    self.pathCount = float("inf")
 
 
 
@@ -96,9 +97,11 @@ class Matrix:
             self.start = (indm,inda)
 
   def dfs(self,start,path=[]):
+    print start
     path = path+[start]
     if start == self.end:
       self.paths.append(path)
+      return
     for node in self.graph[start]:
       if node not in path:
         self.dfs(node,path)
