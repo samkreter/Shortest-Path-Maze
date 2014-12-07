@@ -63,13 +63,11 @@ class Matrix:
       children = self.getChildren(parent)
       for child in children:
         stack.append(child)
-
         #checks if there is already a parent to replace if step count is lower
         if child in self.parentMap and self.parentMap[parent][1]+1 > self.parentMap[child][1]:
           continue
         else:
           self.parentMap[child] = [parent,self.parentMap[parent][1]+1]
-
     #check if there is no path from the start to the end
     if self.end not in self.parentMap:
       print "There is not path to the End"
