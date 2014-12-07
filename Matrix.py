@@ -116,6 +116,7 @@ class Matrix:
   #returns the shorts path from the end
   def returnPath(self):
     curr = self.end
+    print "Step count for path is ",self.parentMap[curr][1]
     while curr != "start":
       self.sPath.append(curr)
       curr = self.parentMap[curr][0]
