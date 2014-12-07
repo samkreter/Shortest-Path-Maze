@@ -1,11 +1,14 @@
 from pprint import pprint
 import sys
+import os.path
 
 class Matrix:
 
   #takes in a filepath and creates the self.matrix from the text file
   def __init__(self,filePath):
     matrix = []
+    while not os.path.exists(filePath):
+      filePath = raw_input("File Does not exist, Please enter again: ")
     for line in open(filePath):
       temp = []
       for c in line:
@@ -39,7 +42,7 @@ class Matrix:
           self.end = (indm,inda)
           print "End = ",self.end
 
-    #check if start and end exists in the matrix 
+    #check if start and end exists in the matrix
     if self.start == "%" or self.end == "%":
       print "Either Start or End was not in maze"
       sys.exit()
