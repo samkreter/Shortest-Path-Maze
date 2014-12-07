@@ -36,9 +36,9 @@ class Matrix:
           self.end = (indm,inda)
           print "End = ",self.end
 
-      if self.start == "%" or self.end == "%":
-        print "Either Start or End was not in maze"
-        sys.exit()
+    if self.start == "%" or self.end == "%":
+      print "Either Start or End was not in maze"
+      sys.exit()
 
 
   #dfs using a stack to find paths
@@ -61,6 +61,9 @@ class Matrix:
         else:
           self.parentMap[child] = [parent,self.parentMap[parent][1]+1]
 
+    if self.end not in self.parentMap:
+      print "There is not path to the End"
+      sys.exit()
     self.returnPath()
 
 
