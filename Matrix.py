@@ -87,15 +87,21 @@ class Matrix:
             self.start = (indm,inda)
 
   #Rescusive DFS that finds all paths from start to the end
-  def dfs(self,start,path=[]):
-    print start
-    path = path+[start]
-    if start == self.end:
-      self.paths.append(path)
-      return
-    for node in self.graph[start]:
-      if node not in path:
-        self.dfs(node,path)
+  def dfs(self):
+    path=[]
+    stack = []
+    stack.append(self.start)
+    while stack:
+      start = stack.pop()
+      path = path+[start]
+      if start == self.end:
+        self.paths.append(path)
+        path = []
+      else:
+        for node in self.graph[start]:
+          if node not in path:
+            stack.append(node)
+
 
   #from the paths found from the DFS will pick the shortest path
   def findShortestPath(self):
