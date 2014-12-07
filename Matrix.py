@@ -1,4 +1,5 @@
 from pprint import pprint
+import sys
 
 class Matrix:
 
@@ -24,6 +25,8 @@ class Matrix:
       print
 
   def getPoints(self):
+    self.start = "%"
+    self.end = "%"
     for indm, array in enumerate(self.matrix):
       for inda, elem in enumerate(array):
         if elem == "S":
@@ -33,12 +36,17 @@ class Matrix:
           self.end = (indm,inda)
           print "End = ",self.end
 
+      if self.start == "%" or self.end == "%":
+        print "Either Start or End was not in maze"
+        sys.exit()
+
 
   #dfs using a stack to find paths
   def dfs(self):
     stack = []
     visited = []
     stack.append(self.start)
+    self.parentMap[self.start] = ["start",0]
     while stack:
       parent = stack.pop()
       print parent
@@ -48,9 +56,10 @@ class Matrix:
       children = self.getChildren(parent)
       for child in children:
         stack.append(child)
-        if child in self.parentMap:
-          print "#########################################"
-        self.parentMap[child] = parent
+        if child in self.parentMap and self.parentMap[parent][1]+1 > self.parentMap[child][1]:
+          continue
+        else:
+          self.parentMap[child] = [parent,self.parentMap[parent][1]+1]
 
     self.returnPath()
 
@@ -88,12 +97,11 @@ class Matrix:
 
 
   def returnPath(self):
-    pprint(self.parentMap)
-    # curr = self.end
-    # while curr:
-    #   self.sPath.append(curr)
-    #   curr = self.parentMap[curr]
-    # self.showPath()
+    curr = self.end
+    while curr != "start":
+      self.sPath.append(curr)
+      curr = self.parentMap[curr][0]
+    self.showPath()
 
 
 
@@ -111,3 +119,4 @@ class Matrix:
   def showPath(self):
     for steps in self.sPath:
       self.matrix[steps[0]][steps[1]] = "+"
+    self.printMatrix()
