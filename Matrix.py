@@ -12,6 +12,8 @@ class Matrix:
       matrix.append(temp)
     self.matrix = matrix
     self.getPoints()
+    self.parentMap = {}
+    self.sPath = []
 
 
   #prints the matrix given to it on the screen
@@ -26,24 +28,31 @@ class Matrix:
       for inda, elem in enumerate(array):
         if elem == "S":
           self.start = (indm,inda)
+          print "Start = ",self.start
         if elem == "E":
           self.end = (indm,inda)
+          print "End = ",self.end
 
 
   #dfs using a stack to find paths
   def dfs(self):
-    path=[]
     stack = []
     visited = []
     stack.append(self.start)
     while stack:
       parent = stack.pop()
+      print parent
       if parent in visited:
         continue
       visited.append(parent)
       children = self.getChildren(parent)
       for child in children:
         stack.append(child)
+        if child in self.parentMap:
+          print "#########################################"
+        self.parentMap[child] = parent
+
+    self.returnPath()
 
 
   def getChildren(self,parent):
@@ -78,16 +87,14 @@ class Matrix:
     return children
 
 
+  def returnPath(self):
+    pprint(self.parentMap)
+    # curr = self.end
+    # while curr:
+    #   self.sPath.append(curr)
+    #   curr = self.parentMap[curr]
+    # self.showPath()
 
-
-
-
-
-        self.graph[(indm,inda)].append((indm,inda-1))
-      if self.matrix[indm+1][inda] == " " or self.matrix[indm+1][inda] == "E":
-        self.graph[(indm,inda)].append((indm+1,inda))
-      if self.matrix[indm][inda+1] == " " or self.matrix[indm][inda+1] == "E":
-        self.graph[(indm,inda)].append((indm,inda+1))
 
 
 
