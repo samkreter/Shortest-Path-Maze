@@ -47,10 +47,47 @@ class Matrix:
 
 
   def getChildren(self,parent):
+    indm = parent[0]
+    inda = parent[1]
+    children = []
+    #check child to the left of parent
     try:
-      if()
+      if self.matrix[indm-1][inda] == " " or self.matrix[indm-1][inda] == "E":
+        children.append((indm-1,inda))
     except IndexError:
-      gotdata = 'null'
+      pass
+
+    try:
+      if self.matrix[indm][inda-1] == " " or self.matrix[indm][inda-1] == "E":
+        children.append((indm,inda-1))
+    except IndexError:
+      pass
+
+    try:
+      if self.matrix[indm+1][inda] == " " or self.matrix[indm+1][inda] == "E":
+        children.append((indm+1,inda))
+    except IndexError:
+      pass
+
+    try:
+      if self.matrix[indm][inda+1] == " " or self.matrix[indm][inda+1] == "E":
+        children.append((indm,inda+1))
+    except IndexError:
+      pass
+
+    return children
+
+
+
+
+
+
+
+        self.graph[(indm,inda)].append((indm,inda-1))
+      if self.matrix[indm+1][inda] == " " or self.matrix[indm+1][inda] == "E":
+        self.graph[(indm,inda)].append((indm+1,inda))
+      if self.matrix[indm][inda+1] == " " or self.matrix[indm][inda+1] == "E":
+        self.graph[(indm,inda)].append((indm,inda+1))
 
 
 
