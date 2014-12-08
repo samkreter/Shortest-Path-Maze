@@ -56,7 +56,7 @@ class Matrix:
     self.parentMap[self.start] = ["start",0]
     while stack:
       parent = stack.pop()
-      print parent
+      print parent," ",self.parentMap[parent][1]
       if parent in visited:
         continue
       visited.append(parent)
@@ -73,7 +73,7 @@ class Matrix:
       print "There is not path to the End"
       sys.exit()
 
-    self.returnPath()
+
 
 
   #used to get the connect children of the parent passed in

@@ -12,5 +12,6 @@ except IndexError:
 
 m = Matrix(file)
 m.dfs()
+m.returnPath()
 
 print "Execution Time = ",time.time() - start_time
