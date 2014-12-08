@@ -82,18 +82,6 @@ class Matrix:
     indm = parent[0]
     inda = parent[1]
     children = []
-    #check child to the bottom of parent
-    try:
-      if self.matrix[indm-1][inda] == " " or self.matrix[indm-1][inda] == "E":
-        children.append((indm-1,inda))
-    except IndexError:
-      pass
-    #checks to the right of the parent
-    try:
-      if self.matrix[indm][inda-1] == " " or self.matrix[indm][inda-1] == "E":
-        children.append((indm,inda-1))
-    except IndexError:
-      pass
 
     #checks to the top of the parent
     try:
@@ -102,10 +90,23 @@ class Matrix:
     except IndexError:
       pass
 
+    #check child to the bottom of parent
+    try:
+      if self.matrix[indm-1][inda] == " " or self.matrix[indm-1][inda] == "E":
+        children.append((indm-1,inda))
+    except IndexError:
+      pass
     #checks to the left of the parent
     try:
       if self.matrix[indm][inda+1] == " " or self.matrix[indm][inda+1] == "E":
         children.append((indm,inda+1))
+    except IndexError:
+      pass
+
+    #checks to the right of the parent
+    try:
+      if self.matrix[indm][inda-1] == " " or self.matrix[indm][inda-1] == "E":
+        children.append((indm,inda-1))
     except IndexError:
       pass
 
@@ -125,4 +126,6 @@ class Matrix:
   def showPath(self):
     for steps in self.sPath:
       self.matrix[steps[0]][steps[1]] = "+"
+    self.matrix[self.start[0]][self.start[1]] = "S"
+    self.matrix[self.end[0]][self.end[1]] = "E"
     self.printMatrix()
