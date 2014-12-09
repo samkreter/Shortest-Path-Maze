@@ -109,7 +109,7 @@ class Matrix:
         children.append((indm,inda-1))
     except IndexError:
       pass
-
+    #return the children 
     return children
 
   #returns the shorts path from the end
