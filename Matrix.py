@@ -58,7 +58,6 @@ class Matrix:
     self.parentMap[self.start] = ["start",0]
     while stack:
       parent = stack.pop()
-      print parent," ",self.parentMap[parent][1]
       if parent in visited:
         continue
       visited.append(parent)
