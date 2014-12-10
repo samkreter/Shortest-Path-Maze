@@ -1,6 +1,7 @@
 from pprint import pprint
 import sys
 import os.path
+import random 
 
 class Matrix:
 
@@ -18,6 +19,7 @@ class Matrix:
     self.getPoints()
     self.parentMap = {} #used to hold parents and the number of steps from the start
     self.sPath = [] #holds the shortest path
+    self.countTime = 0
 
 
   #prints the matrix given to it on the screen
@@ -68,11 +70,16 @@ class Matrix:
           continue
         else:
           self.parentMap[child] = [parent,self.parentMap[parent][1]+1]
+          stack.append(parent)
+
+    self.countTime = self.countTime + 1
     #check if there is no path from the start to the end
     if self.end not in self.parentMap:
       print "There is not path to the End"
       sys.exit()
-
+    if(self.countTime < 4):
+      self.dfs()
+    
 
 
 
@@ -82,34 +89,51 @@ class Matrix:
     indm = parent[0]
     inda = parent[1]
     children = []
+    funcList = []
 
-    #checks to the top of the parent
-    try:
-      if self.matrix[indm+1][inda] == " " or self.matrix[indm+1][inda] == "E":
-        children.append((indm+1,inda))
-    except IndexError:
-      pass
+      #checks to the top of the parent
+    def checkTop(): 
+      try:
+        if self.matrix[indm+1][inda] == " " or self.matrix[indm+1][inda] == "E":
+          children.append((indm+1,inda))
+      except IndexError:
+        pass
 
-    #check child to the bottom of parent
-    try:
-      if self.matrix[indm-1][inda] == " " or self.matrix[indm-1][inda] == "E":
-        children.append((indm-1,inda))
-    except IndexError:
-      pass
+    def checkBottom():
+      try:
+        if self.matrix[indm-1][inda] == " " or self.matrix[indm-1][inda] == "E":
+          children.append((indm-1,inda))
+      except IndexError:
+        pass
+    
     #checks to the left of the parent
-    try:
-      if self.matrix[indm][inda+1] == " " or self.matrix[indm][inda+1] == "E":
-        children.append((indm,inda+1))
-    except IndexError:
-      pass
+    def checkLeft():
+      try:
+        if self.matrix[indm][inda+1] == " " or self.matrix[indm][inda+1] == "E":
+          children.append((indm,inda+1))
+      except IndexError:
+        pass
 
     #checks to the right of the parent
-    try:
-      if self.matrix[indm][inda-1] == " " or self.matrix[indm][inda-1] == "E":
-        children.append((indm,inda-1))
-    except IndexError:
-      pass
-    #return the children 
+    def checkRight():
+      try:
+        if self.matrix[indm][inda-1] == " " or self.matrix[indm][inda-1] == "E":
+          children.append((indm,inda-1))
+      except IndexError:
+        pass
+
+    random.seed()
+    funcOption1 = [checkBottom,checkTop,checkRight,checkLeft] 
+    funcOption2 =  [checkLeft,checkBottom,checkTop,checkRight]
+    funcOption3 = [checkRight,checkLeft,checkBottom,checkTop]
+    funcOption4 = [checkTop,checkRight,checkLeft,checkBottom]
+
+    funcList = [funcOption1,funcOption2,funcOption3,funcOption4]
+  
+    for f in funcList[self.countTime]:
+      f()
+
+    #return the children
     return children
 
   #returns the shorts path from the end
