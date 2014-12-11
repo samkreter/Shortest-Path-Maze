@@ -76,6 +76,7 @@ class Matrix:
     if self.end not in self.parentMap:
       print "There is not path to the End"
       sys.exit()
+    self.returnPath()
     if(self.countTime < 4):
       self.dfs()
     
@@ -138,15 +139,20 @@ class Matrix:
   #returns the shorts path from the end
   def returnPath(self):
     curr = self.end
-    print "Step count for path is ",self.parentMap[curr][1]
+    temp = []
+    print self.parentMap[curr][1]
     while curr != "start":
-      self.sPath.append(curr)
+      temp.append(curr)
       curr = self.parentMap[curr][0]
-    self.showPath()
+    if(self.countTime == 1):
+      self.sPath = temp[:]
+    elif(len(temp) < len(self.sPath)):
+      self.sPath = temp[:]
 
 
   #puts the paths on the matrix to display to the user
   def showPath(self):
+    print "Step count for path is ",len(self.sPath)
     for steps in self.sPath:
       self.matrix[steps[0]][steps[1]] = "+"
     self.matrix[self.start[0]][self.start[1]] = "S"
