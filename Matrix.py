@@ -160,7 +160,16 @@ class Matrix:
     print ""
     print "Shortest path step count is ",len(self.sPath)-1
     for steps in self.sPath:
-      self.matrix[steps[0]][steps[1]] = "+"
+      self.matrix[steps[0]][steps[1]] = bcolors.OKGREEN+"+"+bcolors.ENDC
     self.matrix[self.start[0]][self.start[1]] = "S"
     self.matrix[self.end[0]][self.end[1]] = "E"
     self.printMatrix()
+
+#class to handle the colors
+class bcolors:
+  HEADER = '\033[95m'
+  OKBLUE = '\033[94m'
+  OKGREEN = '\033[92m'
+  WARNING = '\033[93m'
+  FAIL = '\033[91m'
+  ENDC = '\033[0m'
