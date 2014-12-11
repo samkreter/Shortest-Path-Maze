@@ -1,7 +1,5 @@
-from pprint import pprint
-import sys
-import os.path
-import random 
+import sys 
+import os.path #used to check if file exists
 
 class Matrix:
 
@@ -19,7 +17,7 @@ class Matrix:
     self.getPoints()
     self.parentMap = {} #used to hold parents and the number of steps from the start
     self.sPath = [] #holds the shortest path
-    self.countTime = 0
+    self.countTime = 0 #number of iterations of the dfs
 
 
   #prints the matrix given to it on the screen
@@ -52,6 +50,7 @@ class Matrix:
 
   #dfs using a stack to find paths
   def dfs(self):
+    #set up the stack and dfs
     stack = []
     visited = []
     stack.append(self.start)
@@ -77,6 +76,7 @@ class Matrix:
       print "There is not path to the End"
       sys.exit()
     self.returnPath()
+    #call the 
     if(self.countTime < 4):
       self.dfs()
     
@@ -86,6 +86,7 @@ class Matrix:
   #used to get the connect children of the parent passed in
   #used try statments to catch out of index exceptions and treats them as walls
   def getChildren(self,parent):
+    #have the differnt coords of the parent
     indm = parent[0]
     inda = parent[1]
     children = []
@@ -122,14 +123,16 @@ class Matrix:
       except IndexError:
         pass
 
-    random.seed()
+    #make lists for the differnt possible func call orders
     funcOption1 = [checkBottom,checkTop,checkRight,checkLeft] 
     funcOption2 =  [checkLeft,checkBottom,checkTop,checkRight]
     funcOption3 = [checkRight,checkLeft,checkBottom,checkTop]
     funcOption4 = [checkTop,checkRight,checkLeft,checkBottom]
 
+    #create a master list of all funcs order possiblities
     funcList = [funcOption1,funcOption2,funcOption3,funcOption4]
   
+    #depending on the cycle, call the different func orders
     for f in funcList[self.countTime]:
       f()
 
@@ -140,10 +143,13 @@ class Matrix:
   def returnPath(self):
     curr = self.end
     temp = []
-    print self.parentMap[curr][1]
+    print self.countTime," iteration step count: ",self.parentMap[curr][1]
     while curr != "start":
       temp.append(curr)
       curr = self.parentMap[curr][0]
+    
+    #if first time through set shortest path to temp
+    #else check if temp is the shortest path and replace
     if(self.countTime == 1):
       self.sPath = temp[:]
     elif(len(temp) < len(self.sPath)):
@@ -152,7 +158,8 @@ class Matrix:
 
   #puts the paths on the matrix to display to the user
   def showPath(self):
-    print "Step count for path is ",len(self.sPath)
+    print ""
+    print "Shortest path step count is ",len(self.sPath)-1
     for steps in self.sPath:
       self.matrix[steps[0]][steps[1]] = "+"
     self.matrix[self.start[0]][self.start[1]] = "S"
