@@ -143,7 +143,6 @@ class Matrix:
   def returnPath(self):
     curr = self.end
     temp = []
-    print self.countTime," iteration step count: ",self.parentMap[curr][1]
     while curr != "start":
       temp.append(curr)
       curr = self.parentMap[curr][0]
