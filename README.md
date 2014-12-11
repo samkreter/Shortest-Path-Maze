@@ -10,4 +10,4 @@ The Project uses:
 - If the algorithm comes across a child with a parent of larger step count it will replace
 with the new parent
 - This method is reported four times for the different combinations of which child to search first. In many cases all four iterations find the same path, but if there is a difference then the algorithm will choose the shortest. 
-- The step count of all iterations is shown. Then the step count of the shortest along with a visual representation of the maze with the correct path steps marked with "+"
+- The step count of the shortest along with a visual representation of the maze with the correct path steps marked with "+"
